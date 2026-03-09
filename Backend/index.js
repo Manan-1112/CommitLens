@@ -39,10 +39,14 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    // Successful authentication, redirect home.
+    
     res.redirect('/');
   });
 
-app.listen(PORT,()=>{
-    console.log(`Server is running on port ${PORT}`)
+
+app.get('/profile',(req,res)=>{
+    if(req.isAuthenticated()){
+        return res.json({"msg":"Welcome to your profile page"})
+    }
+    return res.status(401).json({"msg":"Unauthorized"})
 })

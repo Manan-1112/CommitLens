@@ -6,7 +6,7 @@ module.exports = passport.use(new GithubStrategy({
     callbackURL: 'http://localhost:3000/auth/github/callback'
   },
   function(accessToken, refreshToken, profile, done) {
-  console.log("Access Token:", accessToken);
+  
   console.log("Profile:", profile);
 
   return done(null, profile);
