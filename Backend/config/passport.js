@@ -7,18 +7,22 @@ passport.use(new GithubStrategy({
     callbackURL: 'http://localhost:3000/auth/github/callback'
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("ACCESS TOKEN:", accessToken);
-    console.log("PROFILE:", profile);
 
-  return done(null, profile);
+    const user = {
+    githubId: profile.id,
+    username: profile.username,
+    accessToken: accessToken
+  };
+
+  return done(null, user);
 }));
 
 passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 module.exports = passport;

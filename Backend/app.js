@@ -2,9 +2,9 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 require("./config/passport");
-
-
 const authRoutes = require("./routes/auth.routes");
+
+const repoRoutes = require("./routes/repo.routes");
 
 const app = express();
 
@@ -24,5 +24,5 @@ app.get("/", (req,res)=>{
 });
 
 app.use("/auth", authRoutes);
-
+app.use(repoRoutes);
 module.exports = app;
